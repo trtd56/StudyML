@@ -5,6 +5,8 @@
 Try MNIST for beginner.
 '''
 
+%matplotlib inline
+
 import tensorflow as tf
 # predict "input_data" from https://github.com/tensorflow/tensorflow/blob/r0.9/tensorflow/examples/tutorials/mnist/input_data.py
 import input_data
