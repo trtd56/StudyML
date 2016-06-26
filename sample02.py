@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-This is same program.
+This prigram is same behaver as sample 1.
+The calculate of this program is used Tensor Flow.
 '''
 
 import tensorflow as tf
