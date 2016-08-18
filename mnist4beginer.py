@@ -5,12 +5,12 @@
 Try MNIST for beginner.
 '''
 
-%matplotlib inline
+#%matplotlib inline
 
 import tensorflow as tf
 # predict "input_data" from https://github.com/tensorflow/tensorflow/blob/r0.9/tensorflow/examples/tutorials/mnist/input_data.py
 import input_data
-import time
+import time, random
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import cm
@@ -32,6 +32,12 @@ def plot_mnist_data(samples):
 def show_shaped_mnist(x,y):
     print "Number:",str(xrange(9)[y.tolist().index(1)])
     print np.array(map(np.sign,x),dtype=np.int32).reshape((28,28))
+
+def random_sampling(mnist_data, num):
+    index = random.sample(range(0, len(mnist_data.train.labels)), num)
+    label = mnist_data.train.labels[index]
+    data = mnist_data.train.images[index]
+    return data, label
 
 if __name__=="__main__":
     start_time = time.time()
@@ -76,7 +82,8 @@ if __name__=="__main__":
     # 1000 trainig for training
     for i in range(1000):
         # get random 100 sample
-        batch_xs, batch_ys = mnist.train.next_batch(100)
+        #batch_xs, batch_ys = mnist.train.next_batch(100)
+        batch_xs, batch_ys = random_sampling(mnist, 100)
         # passing arguments 
         sess.run(train_step, feed_dict={x: batch_xs, correct_data:batch_ys})
     print "--- finish training ---"
