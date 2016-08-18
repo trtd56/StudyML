@@ -7,6 +7,7 @@ Try MNIST by use Deep Learning.
 
 import tensorflow as tf
 import input_data
+from mnist4beginer import random_sampling
 
 def weight_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.1)
@@ -43,7 +44,8 @@ if __name__=="__main__":
 
     train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
     for i in range(1000):
-        batch = mnist.train.next_batch(50)
+        #batch = mnist.train.next_batch(50)
+        batch = random_sampling(mnist, 50)
         train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 
     correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
@@ -84,7 +86,8 @@ if __name__=="__main__":
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     sess.run(tf.initialize_all_variables())
     for i in range(20000):
-        batch = mnist.train.next_batch(50)
+        #batch = mnist.train.next_batch(50)
+        batch = random_sampling(mnist, 50)
         if i%100 == 0:
             train_accuracy = accuracy.eval(feed_dict={x:batch[0], y_: batch[1], keep_prob: 1.0})
             print("step %d, training accuracy %g"%(i, train_accuracy))
