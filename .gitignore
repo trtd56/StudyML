@@ -1,2 +1,3 @@
 input/*
 note/.ipynb_checkpoints/*
+*.DS_Store
