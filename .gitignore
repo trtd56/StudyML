@@ -2,3 +2,4 @@ input/*
 note/.ipynb_checkpoints/*
 *.DS_Store
 src/logs/*
+note/MNIST_data/*
