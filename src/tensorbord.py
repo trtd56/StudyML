@@ -9,15 +9,21 @@ import numpy as np
 
 # 変数の定義
 dim = 5
-x = tf.placeholder(tf.float32, [None, dim + 1])
-w = tf.Variable(tf.zeros([dim+1, 1]))
-y = tf.matmul(x, w)
-t = tf.placeholder(tf.float32, [None, 1])
+with tf.name_scope('X'):
+    x = tf.placeholder(tf.float32, [None, dim + 1])
+with tf.name_scope('W'):
+    w = tf.Variable(tf.zeros([dim+1, 1]))
+with tf.name_scope('multi'):
+    y = tf.matmul(x, w)
+with tf.name_scope('T'):
+    t = tf.placeholder(tf.float32, [None, 1])
 sess = tf.Session()
 
 # 損失関数と学習メソッドの定義
-loss = tf.reduce_sum(tf.square(y - t))
-train_step = tf.train.AdamOptimizer().minimize(loss)
+with tf.name_scope('loss'):
+    loss = tf.reduce_sum(tf.square(y - t))
+with tf.name_scope('train'):
+    train_step = tf.train.AdamOptimizer().minimize(loss)
 
 # TensorBoardで追跡する変数を定義
 with tf.name_scope('summary'):
